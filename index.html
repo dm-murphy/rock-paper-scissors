@@ -32,30 +32,15 @@
         if (playerSelection == computerSelection) { 
             return ('Tie, ' + playerSelection + ' matches ' + computerSelection);
             } 
-        if (playerSelection == 'rock' && computerSelection == 'paper') { 
+        if ((playerSelection == 'rock' && computerSelection == 'paper') || 
+            (playerSelection == 'paper' && computerSelection == 'scissors') ||
+            (playerSelection == 'scissors' && computerSelection == 'rock')) { 
             computerScore++;
             return ('You lose, ' + computerSelection + ' beats ' + playerSelection);
-            } 
-        if (playerSelection == 'rock' && computerSelection == 'scissors') {
-            playerScore++;
-            return ('You win, ' + playerSelection + ' beats ' + computerSelection);
-            }
-        if (playerSelection == 'paper' && computerSelection == 'scissors') { 
-            computerScore++;
-            return ('You lose, ' + computerSelection + ' beats ' + playerSelection);
-            }
-        if (playerSelection == 'paper' && computerSelection == 'rock') {
-            playerScore++;
-            return ('You win, ' + playerSelection + ' beats ' + computerSelection);
-            }
-        if (playerSelection == 'scissors' && computerSelection == 'rock') { 
-            computerScore++;
-            return ('You lose, ' + computerSelection + ' beats ' + playerSelection);
-            }
-        if (playerSelection == 'scissors' && computerSelection == 'paper') {
-            playerScore++;
-            return ('You win, ' + playerSelection + ' beats ' + computerSelection);
-            }
+            } else {
+                playerScore++;
+                return ('You win, ' + playerSelection + ' beats ' + computerSelection);
+            }    
     }
 
     function game() {
