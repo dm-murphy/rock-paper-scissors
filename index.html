@@ -1,71 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Rock Paper Scissors</title>
-    <meta charset="UTF-8"/>
+  <title>Rock Paper Scissors</title>
+  <meta charset="UTF-8"/>
 </head>
-<body>
-    <script>
-        // Your JavaScript goes here!
+<body> 
+  <div>
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
+  </div>
+  <div id="results"></div>
+  <script>
     const choices = ['rock', 'paper', 'scissors'];
+    computerScore = 0;
+    playerScore = 0;
     
     function computerPlay() {
-        return choices[Math.floor(Math.random() * choices.length)];
+      return choices[Math.floor(Math.random() * choices.length)];
     }
 
-    function validatePlayer(playerSelection) {
-        return choices.includes(playerSelection);
-    }
-
-    function playerPlay() {
-        let playerSelection = null;
-        do {
-            playerSelection = prompt("Rock, paper or scissors?").toLowerCase();
-        }
-        while (!validatePlayer(playerSelection));
-        return playerSelection;
-    }
-     
     function playRound(playerSelection, computerSelection) {
-        playerSelection = playerPlay();
-        computerSelection = computerPlay();
+      computerSelection = computerPlay();
+      if ((playerScore < 5) && (computerScore < 5)) {
         if (playerSelection == computerSelection) { 
-            return ('Tie, ' + playerSelection + ' matches ' + computerSelection);
-            } 
+          content.textContent = 'Tie, ' + playerSelection + ' matches ' + computerSelection + ' ' + playerScore + ' - ' + computerScore;
+          return;
+        } 
         if ((playerSelection == 'rock' && computerSelection == 'paper') || 
-            (playerSelection == 'paper' && computerSelection == 'scissors') ||
-            (playerSelection == 'scissors' && computerSelection == 'rock')) { 
-            computerScore++;
-            return ('You lose, ' + computerSelection + ' beats ' + playerSelection);
-            } else {
-                playerScore++;
-                return ('You win, ' + playerSelection + ' beats ' + computerSelection);
-            }    
+        (playerSelection == 'paper' && computerSelection == 'scissors') ||
+        (playerSelection == 'scissors' && computerSelection == 'rock')) { 
+          computerScore++;
+          content.textContent = 'You lose, ' + computerSelection + ' beats ' + playerSelection + ' ' + playerScore + ' - ' + computerScore;
+          return;
+        } else {
+            playerScore++;
+            content.textContent = 'You win, ' + playerSelection + ' beats ' + computerSelection + ' ' + playerScore + ' - ' + computerScore;
+            return;
+          }        
+      } if (playerScore == 5) {
+          content.textContent = 'Player Wins ' + playerScore + ' - ' + computerScore;
+        } else if (computerScore = 5) {
+            content.textContent = 'Computer Wins ' + playerScore + ' - ' + computerScore;
+          }
     }
 
-    function game() {
-        computerScore = 0;
+    function resetRound() {
         playerScore = 0;
-        let roundOne = playRound();
-        console.log('Round One: ' + roundOne);
-        let roundTwo = playRound();
-        console.log ('Round Two: ' + roundTwo);
-        let roundThree = playRound();
-        console.log ('Round Three: ' + roundThree);
-        let roundFour = playRound();
-        console.log ('Round Four: ' + roundFour);
-        let roundFive = playRound();
-        console.log ('Round Five: ' + roundFive);   
-        if (playerScore == computerScore) {
-            return ('You tie! ' + playerScore + '-' + computerScore);
-         }
-        if (playerScore > computerScore) {
-            return ('You won! ' + playerScore + '-' + computerScore);
-        }
-        if (playerScore < computerScore) {
-            return ('You lost! ' + playerScore + '-' + computerScore);
-        }
+        computerScore = 0;
     }
+
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach((button) => {
+      button.addEventListener('click', (e) => {
+        playRound(button.id);
+        });
+    });    
+
+    const results = document.querySelector('#results');
+    
+    const content = document.createElement('div');
+    content.classList.add('content');
+    content.textContent = 'Rock, paper, scissors shoot!';
+
+    results.appendChild(content);
+
     </script>
 </body>
 </html>
