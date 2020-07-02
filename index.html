@@ -6,9 +6,11 @@
 </head>
 <body> 
   <div>
-    <button id="rock">Rock</button>
-    <button id="paper">Paper</button>
-    <button id="scissors">Scissors</button>
+    <button class="play" id="rock">Rock</button>
+    <button class="play" id="paper">Paper</button>
+    <button class="play" id="scissors">Scissors</button>
+    <br>
+    <button id="reset">Reset</button>
   </div>
   <div id="results"></div>
   <script>
@@ -50,7 +52,7 @@
         computerScore = 0;
     }
 
-    const buttons = document.querySelectorAll('button');
+    const buttons = document.querySelectorAll('.play');
     buttons.forEach((button) => {
       button.addEventListener('click', (e) => {
         playRound(button.id);
@@ -64,6 +66,12 @@
     content.textContent = 'Rock, paper, scissors shoot!';
 
     results.appendChild(content);
+
+    const reset = document.querySelector('#reset');
+    reset.addEventListener('click', (e) => {
+      resetRound();
+      content.textContent = 'Rock, paper, scissors shoot!';
+    })
 
     </script>
 </body>
